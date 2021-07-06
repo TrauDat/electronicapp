@@ -21,7 +21,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="600.0" prefWidth="1000.0" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.codetreatise.controller.UserController">
+<BorderPane prefHeight="600.0" prefWidth="1000.0" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.elec.controller.AccountController">
    <top>
       <MenuBar BorderPane.alignment="TOP_LEFT">
         <menus>
@@ -165,7 +165,7 @@
                   </Button>
                </children>
             </HBox>
-            <TableView fx:id="userTable" prefHeight="300.0" prefWidth="679.0" tableMenuButtonVisible="true">
+            <TableView fx:id="accountTable" prefHeight="300.0" prefWidth="679.0" tableMenuButtonVisible="true">
               <columns>
                 <TableColumn fx:id="colUserId" maxWidth="700.0" prefWidth="20.0" text="ID" />
                 <TableColumn fx:id="colFirstName" maxWidth="4000.0" prefWidth="75.0" text="First Name" />
