@@ -13,12 +13,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 
+import com.elec.bean.Mail;
 import com.elec.config.StageManager;
 import com.elec.entity.Account;
 import com.elec.service.AccountService;
+import com.elec.service.MailService;
 import com.elec.view.FxmlView;
 
 import javafx.application.Platform;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -29,6 +34,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -38,6 +44,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
@@ -51,6 +58,9 @@ public class AccountController implements Initializable {
 
 	@FXML
 	private Button btnLogout;
+
+	@FXML
+	private Button btnSendMail;
 
 	@FXML
 	private Label userId;
@@ -113,6 +123,9 @@ public class AccountController implements Initializable {
 	private TableColumn<Account, String> colEmail;
 
 	@FXML
+	private TableColumn<Account, CheckBox> colSendEmail;
+
+	@FXML
 	private TableColumn<Account, Boolean> colEdit;
 
 	@FXML
@@ -124,6 +137,9 @@ public class AccountController implements Initializable {
 
 	@Autowired
 	private AccountService accountService;
+
+	@Autowired
+	private MailService mailService;
 
 	private ObservableList<Account> userList = FXCollections.observableArrayList();
 	private ObservableList<String> roles = FXCollections.observableArrayList("Admin", "User");
@@ -185,21 +201,37 @@ public class AccountController implements Initializable {
 			loadUserDetails();
 		}
 	}
-	
+
 	@FXML
-    private void deleteUsers(ActionEvent event){
-    	List<Account> users = accountTable.getSelectionModel().getSelectedItems();
-    	
-    	Alert alert = new Alert(AlertType.CONFIRMATION);
+	private void sendMail(ActionEvent event) {
+		Mail mail = new Mail();
+		mail.setMailFrom("hoang.hutech.97@gmail.com");
+		mail.setMailSubject("Spring Boot - Email Example");
+        mail.setMailContent("This is email test from ElecApp");
+		userList.forEach(user -> {
+			if (user.getIsSendMail()) {
+				mail.setMailTo(user.getEmail());
+				mailService.sendMail(mail);
+			}
+		});
+		loadUserDetails();
+	}
+
+	@FXML
+	private void deleteUsers(ActionEvent event) {
+		List<Account> users = accountTable.getSelectionModel().getSelectedItems();
+
+		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Confirmation Dialog");
 		alert.setHeaderText(null);
 		alert.setContentText("Are you sure you want to delete selected?");
 		Optional<ButtonType> action = alert.showAndWait();
-		
-		if(action.get() == ButtonType.OK) accountService.deleteInBatch(users);
-    	
-    	loadUserDetails();
-    }
+
+		if (action.get() == ButtonType.OK)
+			accountService.deleteInBatch(users);
+
+		loadUserDetails();
+	}
 
 	private void clearFields() {
 		userId.setText(null);
@@ -287,8 +319,30 @@ public class AccountController implements Initializable {
 		colGender.setCellValueFactory(new PropertyValueFactory<>("gender"));
 		colRole.setCellValueFactory(new PropertyValueFactory<>("role"));
 		colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+		colSendEmail.setCellValueFactory(booleanCellValueFactory);
 		colEdit.setCellFactory(cellFactory);
 	}
+
+	Callback<CellDataFeatures<Account, CheckBox>, ObservableValue<CheckBox>> booleanCellValueFactory = new Callback<CellDataFeatures<Account, CheckBox>, ObservableValue<CheckBox>>() {
+		@Override
+		public ObservableValue<CheckBox> call(CellDataFeatures<Account, CheckBox> arg0) {
+			Account user = arg0.getValue();
+			CheckBox checkBox = new CheckBox();
+			
+			checkBox.selectedProperty().setValue(user.getIsSendMail());
+			
+			checkBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
+
+				@Override
+				public void changed(ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) {
+					user.setIsSendMail(new_val);
+				}
+				
+			});
+			
+			return new SimpleObjectProperty<CheckBox>(checkBox);
+		}
+	};
 
 	Callback<TableColumn<Account, Boolean>, TableCell<Account, Boolean>> cellFactory = new Callback<TableColumn<Account, Boolean>, TableCell<Account, Boolean>>() {
 		@Override

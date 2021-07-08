@@ -21,7 +21,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="600.0" prefWidth="1000.0" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.elec.controller.AccountController">
+<BorderPane prefHeight="600.0" prefWidth="1000.0" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.elec.controller.AccountController">
    <top>
       <MenuBar BorderPane.alignment="TOP_LEFT">
         <menus>
@@ -163,6 +163,17 @@
                         <DropShadow blurType="ONE_PASS_BOX" color="#00000091" />
                      </effect>
                   </Button>
+                  <Button fx:id="btnSendMail" mnemonicParsing="false" onAction="#sendMail" prefHeight="22.0" prefWidth="70.0" styleClass="background" text="Send mail" textFill="#fff9f9" textOverrun="CLIP">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="5.0" top="5.0" />
+                     </HBox.margin>
+                     <effect>
+                        <DropShadow blurType="ONE_PASS_BOX" color="#00000091" />
+                     </effect>
+                  </Button>
                </children>
             </HBox>
             <TableView fx:id="accountTable" prefHeight="300.0" prefWidth="679.0" tableMenuButtonVisible="true">
@@ -174,6 +185,7 @@
                   <TableColumn fx:id="colGender" maxWidth="4000.0" prefWidth="60.0" text="Gender" />
                   <TableColumn fx:id="colRole" maxWidth="4000.0" prefWidth="75.0" text="Role" />
                   <TableColumn fx:id="colEmail" maxWidth="6000.0" prefWidth="130.0" text="Email" />
+                  <TableColumn fx:id="colSendEmail" maxWidth="3500.0" prefWidth="75.0" text="SendMail" />
                   <TableColumn fx:id="colEdit" maxWidth="3500.0" prefWidth="75.0" text="Edit" />
               </columns>
                <VBox.margin>
