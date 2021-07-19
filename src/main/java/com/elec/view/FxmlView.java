@@ -4,6 +4,17 @@ import java.util.ResourceBundle;
 
 public enum FxmlView {
 
+	ADMIN {
+		@Override
+		public String getTitle() {
+			return getStringFromResourceBundle("admin.title");
+		}
+		
+		@Override
+		public String getFxmlFile() {
+			return "/fxml/Admin.fxml";
+		}
+	},
 	USER {
 		@Override
 		public String getTitle() {
@@ -13,6 +24,28 @@ public enum FxmlView {
 		@Override
 		public String getFxmlFile() {
 			return "/fxml/User.fxml";
+		}
+	},
+	MAINFRAME {
+		@Override
+		public String getTitle() {
+			return getStringFromResourceBundle("mainframe.title");
+		}
+		
+		@Override
+		public String getFxmlFile() {
+			return "/fxml/MainFrame.fxml";
+		}
+	},
+	DIALOG {
+		@Override
+		public String getTitle() {
+			return getStringFromResourceBundle("dialog.title");
+		}
+		
+		@Override
+		public String getFxmlFile() {
+			return "/fxml/Dialog.fxml";
 		}
 	},
 	LOGIN {

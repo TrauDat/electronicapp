@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 
 import com.elec.config.StageManager;
+import com.elec.entity.Account;
 import com.elec.service.AccountService;
 import com.elec.view.FxmlView;
 
@@ -22,6 +23,8 @@ import javafx.scene.control.TextField;
 @Controller
 public class LoginController implements Initializable{
 
+	private static final String ROLE_ADMIN = "Admin";
+	
 	@Autowired
 	private AccountService accountService;
 	
@@ -44,7 +47,13 @@ public class LoginController implements Initializable{
 	@FXML
 	private void login(ActionEvent event) {
 		if(accountService.authenticate(getUsername(), getPassword())) {
-			stageManager.switchScene(FxmlView.USER);
+			Account account = accountService.findByEmail(getUsername());
+			if (account.getRole().equals(ROLE_ADMIN)) {
+				stageManager.switchScene(FxmlView.ADMIN);
+			} else {
+				// User view
+				MainFrameController.show();
+			}
 		} else {
 			lblLogin.setText("Login Failed");
 		}

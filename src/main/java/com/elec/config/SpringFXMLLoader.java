@@ -36,4 +36,12 @@ public class SpringFXMLLoader {
 		loader.setLocation(getClass().getResource(fxmlPath));
 		return loader.load();
 	}
+	
+	public FXMLLoader getFXMLLoader(String fxmlPath) {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setControllerFactory(context::getBean);
+		loader.setResources(resourceBundle);
+		loader.setLocation(getClass().getResource(fxmlPath));
+		return loader;
+	}
 }

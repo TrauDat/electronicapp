@@ -1,0 +1,197 @@
+* {
+    primary: #1b262c;
+    secondary: #3282b8;
+    primary-light: #0f4c75;
+    secondary-light: #bbe1fa;
+}
+
+.login-view {
+    -fx-pref-width: 480px;
+    -fx-background-color: secondary-light;
+}
+
+.login-title {
+    -fx-alignment: center-left;
+    -fx-padding: 16px;
+    -fx-background-color: primary;
+}
+
+.login-title > .header {
+    -fx-font-size: 20px;
+    -fx-text-fill: white;
+}
+
+.login-body {
+    -fx-padding: 0 64 16 16;
+}
+
+.al-center-left {
+    -fx-alignment: center-left;
+}
+
+.sp-5 {
+    -fx-spacing: 5px;
+}
+
+.wid-120 {
+    -fx-pref-width: 120px;
+}
+
+.text-field, .password-field, .button {
+    -fx-background-color: transparent;
+    -fx-border-style: solid;
+    -fx-border-color: secondary;
+}
+
+.button:hover, .button:focused {
+    -fx-background-color: primary;
+    -fx-text-fill: secondary-light;
+}
+
+.main-frame {
+    -fx-pref-width: 1290px;
+    -fx-pref-height: 780px;
+}
+
+.side-bar {
+    -fx-padding: 10 0 0 0;
+    -fx-background-color: primary;
+}
+
+.side-bar-menu {
+    -fx-alignment: center;
+    -fx-spacing: 5px;
+    -fx-pref-height: 70px;
+    -fx-pref-width: 100px;
+    -fx-min-width: 100px;
+}
+
+.side-bar-menu: hover {
+    -fx-background-color: secondary;
+}
+
+.side-bar-menu: hover .label, .side-bar-menu: hover SVGPath {
+    -fx-fill: white;
+    -fx-text-fill: white;
+}
+
+.side-bar-menu .label, .side-bar-menu SVGPath {
+    -fx-fill: white;
+    -fx-text-fill: white;
+}
+
+.side-bar-menu.active {
+    -fx-background-color: primary-light;
+}
+
+.content-view {
+    -fx-pref-width: 1180px;
+    -fx-pref-height: 780px;
+    -fx-max-width: 5000px;
+    -fx-max-height: 3000px;
+}
+
+.content-view-header {
+    -fx-padding: 20px;
+}
+
+.content-view-header > .title{
+    -fx-font-size: 32px;
+}
+
+.dialog {
+    -fx-pref-width: 600px;
+    -fx-background-color: secondary-light;
+}
+
+.dialog-icon {
+    -fx-pref-width: 160px;
+    -fx-alignment: center;
+    -fx-background-color: primary;
+}
+
+.dialog-icon SVGPath {
+    -fx-fill: secondary-light;
+}
+
+.dialog-body {
+    -fx-padding: 20px;
+    -fx-alignment: center-left;
+}
+
+.dialog-title {
+    -fx-font-size: 24px;
+}
+
+.dialog-message-box {
+    -fx-padding: 20 0 20 0;
+    -fx-spacing: 5;
+}
+
+.sp-10 {
+    -fx-spacing: 10;
+}
+
+.dialog-button:hover {
+    -fx-background-color: primary;
+    -fx-text-fill: secondary-light;
+}
+
+.dialog-button-box {
+    -fx-alignment: center-right;
+    -fx-spacing: 10;
+}
+
+.dialog-button-box Label {
+    -fx-font-size: 18px;
+}
+
+.category-container {
+    -fx-padding: 0 20 20 20;
+    -fx-vgap: 20;
+    -fx-hgap: 20;
+}
+
+.category-item {
+    -fx-alignment: center-left;
+    -fx-padding: 20;
+    -fx-spacing: 20;
+    -fx-pref-width: 240px;
+    -fx-background-color: secondary;
+}
+
+.category-item Label {
+    -fx-font-size: 24px;
+    -fx-text-fill: secondary-light;
+}
+
+.category-item SVGPath {
+    -fx-fill: secondary-light;
+}
+
+.add-button {
+    -fx-alignment: center;
+    -fx-pref-width: 100px;
+}
+
+.add-button:hover {
+    -fx-background-color: primary-light;
+}
+
+.add-button:hover SVGPath {
+    -fx-fill: secondary-light;
+}
+
+.search-bar {
+    -fx-padding: 0 0 0 20;
+    -fx-spacing: 10;
+}
+
+.search-bar > TextField, .search-bar > ComboBox {
+    -fx-pref-width: 200px;
+    -fx-max-width: 200px;
+}
+
+.table-wrapper {
+    -fx-padding: 20;
+}
