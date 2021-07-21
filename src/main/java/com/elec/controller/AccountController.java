@@ -55,6 +55,9 @@ import javafx.util.Callback;
 @Controller
 public class AccountController implements Initializable {
 
+	private static final String patternEmail = "[a-zA-Z0-9][a-zA-Z0-9._]*@[a-zA-Z0-9]+([.][a-zA-Z]+)+";
+	private static final String patternName = "[a-zA-Z]+";
+
 	@FXML
 	private Button btnLogout;
 
@@ -163,14 +166,13 @@ public class AccountController implements Initializable {
 
 	@FXML
 	private void saveUser(ActionEvent event) {
-		if (ValidationUtil.validate("First Name", getFirstName(), "[a-zA-Z]+")
-				&& ValidationUtil.validate("Last Name", getLastName(), "[a-zA-Z]+")
+		if (ValidationUtil.validate("First Name", getFirstName(), patternName)
+				&& ValidationUtil.validate("Last Name", getLastName(), patternName)
 				&& ValidationUtil.emptyValidation("DOB", dob.getEditor().getText().isEmpty())
 				&& ValidationUtil.emptyValidation("Role", getRole() == null)) {
 
 			if (userId.getText() == null || userId.getText() == "") {
-				if (ValidationUtil.validate("Email", getEmail(),
-						"[a-zA-Z0-9][a-zA-Z0-9._]*@[a-zA-Z0-9]+([.][a-zA-Z]+)+")
+				if (ValidationUtil.validate("Email", getEmail(), patternEmail)
 						&& ValidationUtil.emptyValidation("Password", getPassword().isEmpty())) {
 
 					Account user = new Account();
