@@ -6,14 +6,13 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 
 import com.elec.bean.Mail;
+import com.elec.common.ValidationUtil;
 import com.elec.config.StageManager;
 import com.elec.entity.Account;
 import com.elec.service.AccountService;
@@ -164,13 +163,15 @@ public class AccountController implements Initializable {
 
 	@FXML
 	private void saveUser(ActionEvent event) {
-		if (validate("First Name", getFirstName(), "[a-zA-Z]+") && validate("Last Name", getLastName(), "[a-zA-Z]+")
-				&& emptyValidation("DOB", dob.getEditor().getText().isEmpty())
-				&& emptyValidation("Role", getRole() == null)) {
+		if (ValidationUtil.validate("First Name", getFirstName(), "[a-zA-Z]+")
+				&& ValidationUtil.validate("Last Name", getLastName(), "[a-zA-Z]+")
+				&& ValidationUtil.emptyValidation("DOB", dob.getEditor().getText().isEmpty())
+				&& ValidationUtil.emptyValidation("Role", getRole() == null)) {
 
 			if (userId.getText() == null || userId.getText() == "") {
-				if (validate("Email", getEmail(), "[a-zA-Z0-9][a-zA-Z0-9._]*@[a-zA-Z0-9]+([.][a-zA-Z]+)+")
-						&& emptyValidation("Password", getPassword().isEmpty())) {
+				if (ValidationUtil.validate("Email", getEmail(),
+						"[a-zA-Z0-9][a-zA-Z0-9._]*@[a-zA-Z0-9]+([.][a-zA-Z]+)+")
+						&& ValidationUtil.emptyValidation("Password", getPassword().isEmpty())) {
 
 					Account user = new Account();
 					user.setFirstName(getFirstName());
@@ -209,7 +210,7 @@ public class AccountController implements Initializable {
 		Mail mail = new Mail();
 		mail.setMailFrom("hoang.hutech.97@gmail.com");
 		mail.setMailSubject("Spring Boot - Email Example");
-        mail.setMailContent("This is email test from ElecApp");
+		mail.setMailContent("This is email test from ElecApp");
 		userList.forEach(user -> {
 			if (user.getIsSendMail()) {
 				mail.setMailTo(user.getEmail());
@@ -330,18 +331,18 @@ public class AccountController implements Initializable {
 		public ObservableValue<CheckBox> call(CellDataFeatures<Account, CheckBox> arg0) {
 			Account user = arg0.getValue();
 			CheckBox checkBox = new CheckBox();
-			
+
 			checkBox.selectedProperty().setValue(user.getIsSendMail());
-			
+
 			checkBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
 
 				@Override
 				public void changed(ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) {
 					user.setIsSendMail(new_val);
 				}
-				
+
 			});
-			
+
 			return new SimpleObjectProperty<CheckBox>(checkBox);
 		}
 	};
@@ -403,49 +404,6 @@ public class AccountController implements Initializable {
 		userList.addAll(accountService.findAll());
 
 		accountTable.setItems(userList);
-	}
-
-	/*
-	 * Validations
-	 */
-	private boolean validate(String field, String value, String pattern) {
-		if (!value.isEmpty()) {
-			Pattern p = Pattern.compile(pattern);
-			Matcher m = p.matcher(value);
-			if (m.find() && m.group().equals(value)) {
-				return true;
-			} else {
-				validationAlert(field, false);
-				return false;
-			}
-		} else {
-			validationAlert(field, true);
-			return false;
-		}
-	}
-
-	private boolean emptyValidation(String field, boolean empty) {
-		if (!empty) {
-			return true;
-		} else {
-			validationAlert(field, true);
-			return false;
-		}
-	}
-
-	private void validationAlert(String field, boolean empty) {
-		Alert alert = new Alert(AlertType.WARNING);
-		alert.setTitle("Validation Error");
-		alert.setHeaderText(null);
-		if (field.equals("Role"))
-			alert.setContentText("Please Select " + field);
-		else {
-			if (empty)
-				alert.setContentText("Please Enter " + field);
-			else
-				alert.setContentText("Please Enter Valid " + field);
-		}
-		alert.showAndWait();
 	}
 
 }
