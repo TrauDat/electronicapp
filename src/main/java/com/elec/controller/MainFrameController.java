@@ -1,11 +1,10 @@
 package com.elec.controller;
 
-import javax.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 
+import com.elec.common.FXMLLoaderManage;
 import com.elec.config.StageManager;
 import com.elec.view.FxmlView;
 import com.elec.view.Menu;
@@ -26,16 +25,9 @@ import javafx.stage.StageStyle;
 @Controller
 public class MainFrameController {
 
-	private static StageManager stageManagerStatic;
-
 	@Autowired
 	@Lazy
 	private StageManager stageManager;
-
-	@PostConstruct
-	private void init() {
-		stageManagerStatic = this.stageManager;
-	}
 	
 	@FXML
 	private VBox sideBar;
@@ -115,7 +107,7 @@ public class MainFrameController {
 		public MainFrameController build() {
 			try {
 				Stage stage = new Stage(StageStyle.UNDECORATED);
-				FXMLLoader loader = stageManagerStatic.fXMLLoader(FxmlView.DIALOG.getFxmlFile());
+				FXMLLoader loader = FXMLLoaderManage.fXMLLoader(FxmlView.DIALOG.getFxmlFile());
 				Parent view = loader.load();
 				stage.setScene(new Scene(view));
 
@@ -178,7 +170,7 @@ public class MainFrameController {
 	public static void show() {
 		try {
 			Stage stage = new Stage();
-			FXMLLoader loader = stageManagerStatic.fXMLLoader(FxmlView.MAINFRAME.getFxmlFile());
+			FXMLLoader loader = FXMLLoaderManage.fXMLLoader(FxmlView.MAINFRAME.getFxmlFile());
 			Parent root = loader.load();
 			stage.setScene(new Scene(root));
 			stage.setFullScreen(true);

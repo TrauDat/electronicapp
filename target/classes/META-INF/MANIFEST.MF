@@ -1,11 +1,6 @@
 Manifest-Version: 1.0
-Built-By: TrauDat
-Build-Jdk: 11.0.8
+Build-Jdk-Spec: 11
 Implementation-Title: ProjectElecJavaFX
 Implementation-Version: 1.0
-Implementation-Vendor-Id: com.elec.app
-Implementation-Vendor: Pivotal Software, Inc.
-Implementation-URL: http://projects.spring.io/spring-boot/ProjectElecJav
- aFX/
 Created-By: Maven Integration for Eclipse
 

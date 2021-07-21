@@ -19,13 +19,13 @@ import javafx.scene.Parent;
 @Component
 public class SpringFXMLLoader {
 
-	private final ApplicationContext context;
-	private final ResourceBundle resourceBundle;
+	private static ApplicationContext context;
+	private static ResourceBundle resourceBundle;
 	
 	@Autowired
 	public SpringFXMLLoader(ApplicationContext context, ResourceBundle resourceBundle) {
-		this.resourceBundle = resourceBundle;
-		this.context = context;	
+		SpringFXMLLoader.resourceBundle = resourceBundle;
+		SpringFXMLLoader.context = context;	
 	}
 	
 	
@@ -37,11 +37,11 @@ public class SpringFXMLLoader {
 		return loader.load();
 	}
 	
-	public FXMLLoader getFXMLLoader(String fxmlPath) {
+	public static FXMLLoader getFXMLLoader(String fxmlPath) {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setControllerFactory(context::getBean);
 		loader.setResources(resourceBundle);
-		loader.setLocation(getClass().getResource(fxmlPath));
+		loader.setLocation(SpringFXMLLoader.class.getResource(fxmlPath));
 		return loader;
 	}
 }

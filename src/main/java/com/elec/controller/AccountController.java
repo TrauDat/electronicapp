@@ -187,14 +187,16 @@ public class AccountController implements Initializable {
 				}
 
 			} else {
-				Account user = accountService.find(Long.parseLong(userId.getText()));
-				user.setFirstName(getFirstName());
-				user.setLastName(getLastName());
-				user.setDob(getDob());
-				user.setGender(getGender());
-				user.setRole(getRole());
-				Account updatedUser = accountService.update(user);
-				updateAlert(updatedUser);
+				Optional<Account> user = accountService.find(Long.parseLong(userId.getText()));
+				if (user.isPresent()) {
+					user.get().setFirstName(getFirstName());
+					user.get().setLastName(getLastName());
+					user.get().setDob(getDob());
+					user.get().setGender(getGender());
+					user.get().setRole(getRole());
+					Account updatedUser = accountService.update(user.get());
+					updateAlert(updatedUser);
+				}
 			}
 
 			clearFields();
