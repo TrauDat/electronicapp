@@ -55,7 +55,6 @@ public class HouseHoldEdit {
 
 	private HouseHold houseHold;
 
-	private Consumer<HouseHold> consumer;
 	private Consumer<HouseHold> saveHandler;
 
 	public String getGender() {
@@ -110,11 +109,10 @@ public class HouseHoldEdit {
 		if (null == houseHold) {
 			title.setText("Tạo mới hộ gia đình");
 			this.houseHold = new HouseHold();
-//			houseHold.setA
 		} else {
 			title.setText("Cập nhật hộ gia đình");
 			this.houseHold = houseHold;
-			if (this.houseHold.getGender().equals("Nam")) {
+			if (this.houseHold.getGender().equals("Male")) {
 				rbMale.setSelected(true);
 			} else {
 				rbFemale.setSelected(true);

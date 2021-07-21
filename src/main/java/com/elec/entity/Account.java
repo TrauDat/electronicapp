@@ -1,10 +1,13 @@
 package com.elec.entity;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,7 +20,7 @@ import lombok.Data;
 @Entity
 @Table(name = "Account")
 @Data
-public class Account{
+public class Account {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,24 +40,40 @@ public class Account{
 	private String email;
 
 	private String password;
-	
-	@OneToMany(mappedBy = "account")
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "account", cascade = { CascadeType.PERSIST, CascadeType.MERGE,CascadeType.DETACH,
+			CascadeType.REFRESH })
 	private List<HouseHold> listHouseHold;
 
 	@Transient
 	private boolean isSendMail;
-	
+
 	public boolean getIsSendMail() {
-        return isSendMail;
-    }
-	
+		return isSendMail;
+	}
+
 	public void setIsSendMail(boolean selected) {
-        this.isSendMail = selected;
-    }
+		this.isSendMail = selected;
+	}
+
+	public void updateHouseHold(int position, HouseHold houseHold) {
+		listHouseHold.set(position, houseHold);
+	}
+
+	public void addHouseHold(HouseHold houseHold) {
+		if (houseHold == null) {
+			listHouseHold = new ArrayList<>();
+		}
+
+		listHouseHold.add(houseHold);
+
+		houseHold.setAccount(this);
+	}
 
 	@Override
 	public String toString() {
 		return "Account [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", dob=" + dob + ", email="
 				+ email + "]";
 	}
+
 }

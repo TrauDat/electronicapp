@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import com.elec.entity.Account;
 import com.elec.entity.HouseHold;
 import com.elec.popup.HouseHoldEdit;
+import com.elec.service.AccountService;
 import com.elec.service.HouseHoldService;
 
 import javafx.fxml.FXML;
@@ -21,6 +23,9 @@ public class HouseHoldController extends AbstractController {
 	@Autowired
 	private HouseHoldService houseHoldService;
 
+	@Autowired
+	private AccountService accountService;
+
 	@FXML
 	private TextField fullName;
 
@@ -33,7 +38,7 @@ public class HouseHoldController extends AbstractController {
 				HouseHoldEdit.edit(houseHold, this::save);
 			}
 		});
-		
+
 		tableView.setContextMenu(new ContextMenu(edit));
 		search();
 	}
@@ -41,14 +46,13 @@ public class HouseHoldController extends AbstractController {
 	@FXML
 	private TableView<HouseHold> tableView;
 
-
 	@FXML
 	private void search() {
 		tableView.getItems().clear();
 		List<HouseHold> list = houseHoldService.search(fullName.getText());
 		tableView.getItems().addAll(list);
 	}
-	
+
 	@FXML
 	private void clear() {
 		fullName.clear();
@@ -61,7 +65,20 @@ public class HouseHoldController extends AbstractController {
 	}
 
 	private void save(HouseHold houseHold) {
-		houseHoldService.save(houseHold);
+		Account account = MainFrameController.loadAccount();
+		if (houseHold.getId() != null) {
+			List<HouseHold> listHouseHold = houseHoldService.findByAccountid(account.getId());
+			listHouseHold.forEach(h -> {
+				if (h.getId().equals(houseHold.getId())) {
+					listHouseHold.set(listHouseHold.indexOf(h), houseHold);
+				}
+			});
+			account.setListHouseHold(listHouseHold);
+		} else {
+			account.addHouseHold(houseHold);
+		}
+
+		accountService.save(account);
 		search();
 	}
 

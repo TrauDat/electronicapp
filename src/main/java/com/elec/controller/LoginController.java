@@ -52,6 +52,7 @@ public class LoginController implements Initializable{
 				stageManager.switchScene(FxmlView.ADMIN);
 			} else {
 				// User view
+				MainFrameController.getAccount(account);
 				MainFrameController.show();
 			}
 		} else {

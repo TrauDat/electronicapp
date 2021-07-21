@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 
 import com.elec.common.FXMLLoaderManage;
 import com.elec.config.StageManager;
+import com.elec.entity.Account;
 import com.elec.view.FxmlView;
 import com.elec.view.Menu;
 
@@ -53,6 +54,8 @@ public class MainFrameController {
 	private Button closeBtn;
 
 	private Stage stage;
+	
+	private static Account accountStatic;
 
 	@FXML
 	private void cancel() {
@@ -165,6 +168,15 @@ public class MainFrameController {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
+	}
+	
+	public static Account getAccount(Account account) {
+		accountStatic = account;
+		return accountStatic;
+	}
+	
+	public static Account loadAccount() {
+		return accountStatic;
 	}
 
 	public static void show() {
