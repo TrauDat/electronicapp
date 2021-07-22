@@ -32,18 +32,22 @@ public class ValidationUtil {
 			return false;
 		}
 	}
+	
+	public static boolean isEmpty(String string) {
+	    return string == null || string.trim().isEmpty();
+	}
 
 	public static void validationAlert(String field, boolean empty) {
 		Alert alert = new Alert(AlertType.WARNING);
 		alert.setTitle("Validation Error");
 		alert.setHeaderText(null);
 		if (field.equals("Role"))
-			alert.setContentText("Please Select " + field);
+			alert.setContentText("Vui lòng chọn " + field);
 		else {
 			if (empty)
-				alert.setContentText("Please Enter " + field);
+				alert.setContentText("Vui lòng nhập " + field);
 			else
-				alert.setContentText("Please Enter Valid " + field);
+				alert.setContentText("Vui lòng nhập " + field + " hợp lệ");
 		}
 		alert.showAndWait();
 	}

@@ -2,12 +2,10 @@ package com.elec.popup;
 
 import java.util.function.Consumer;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 
 import com.elec.common.FXMLLoaderManage;
-import com.elec.config.StageManager;
+import com.elec.common.ValidationUtil;
 import com.elec.entity.HouseHold;
 import com.elec.view.FxmlView;
 
@@ -25,6 +23,10 @@ import javafx.stage.StageStyle;
 
 @Controller
 public class HouseHoldEdit {
+
+	private static final String patternEmail = "[a-zA-Z0-9][a-zA-Z0-9._]*@[a-zA-Z0-9]+([.][a-zA-Z]+)+";
+	private static final String patternName = "[a-zA-Z]+";
+	private static final String patternIdentityCard = "[0-9]{9}";
 
 	@FXML
 	private ToggleGroup gender;
@@ -84,14 +86,22 @@ public class HouseHoldEdit {
 	@FXML
 	private void save() {
 		try {
-			houseHold.setFullName(fullName.getText());
-			houseHold.setGender(getGender());
-			houseHold.setIdentityCard(identityCard.getText());
-			houseHold.setDob(dob.getValue());
-			houseHold.setEmail(email.getText());
+			if (ValidationUtil.emptyValidation("Tên chủ hộ", ValidationUtil.isEmpty(fullName.getText()))
+					&& ValidationUtil.validate("Tên chủ hộ", fullName.getText(), patternName)
+					&& ValidationUtil.emptyValidation("CMND ", ValidationUtil.isEmpty(identityCard.getText()))
+					&& ValidationUtil.validate("CMND", identityCard.getText(), patternIdentityCard)
+					&& ValidationUtil.emptyValidation("Năm sinh", ValidationUtil.isEmpty(dob.getEditor().getText()))
+					&& ValidationUtil.emptyValidation("Email", ValidationUtil.isEmpty(email.getText()))
+					&& ValidationUtil.validate("Email", email.getText(), patternEmail)) {
 
-			saveHandler.accept(houseHold);
-			close();
+				houseHold.setFullName(fullName.getText());
+				houseHold.setGender(getGender());
+				houseHold.setIdentityCard(identityCard.getText());
+				houseHold.setDob(dob.getValue());
+				houseHold.setEmail(email.getText());
+				saveHandler.accept(houseHold);
+				close();
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -120,7 +130,6 @@ public class HouseHoldEdit {
 		}
 
 		fullName.setText(this.houseHold.getFullName());
-
 		identityCard.setText(this.houseHold.getIdentityCard());
 		dob.setValue(this.houseHold.getDob());
 		email.setText(this.houseHold.getEmail());
