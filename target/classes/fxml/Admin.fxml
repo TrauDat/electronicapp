@@ -9,12 +9,14 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Pagination?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.Pagination?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -176,7 +178,7 @@
                   </Button>
                </children>
             </HBox>
-            <TableView fx:id="accountTable" prefHeight="300.0" prefWidth="679.0" tableMenuButtonVisible="true">
+            <TableView fx:id="accountTable" prefHeight="600.0" prefWidth="679.0" tableMenuButtonVisible="true">
               <columns>
                 <TableColumn fx:id="colUserId" maxWidth="700.0" prefWidth="20.0" text="ID" />
                 <TableColumn fx:id="colFirstName" maxWidth="4000.0" prefWidth="75.0" text="First Name" />
@@ -202,6 +204,7 @@
                   </ContextMenu>
                </contextMenu>
             </TableView>
+            <Pagination fx:id="pagination" layoutX="14.0" layoutY="96.0" pageCount="10" prefHeight="384.0" prefWidth="531.0" />
          </children>
       </VBox>
    </center>

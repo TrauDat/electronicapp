@@ -29,6 +29,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -38,6 +39,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.Pagination;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.SelectionMode;
@@ -57,6 +59,7 @@ public class AccountController implements Initializable {
 
 	private static final String patternEmail = "[a-zA-Z0-9][a-zA-Z0-9._]*@[a-zA-Z0-9]+([.][a-zA-Z]+)+";
 	private static final String patternName = "[a-zA-Z]+";
+	private static final int rowsPerPage = 10;
 
 	@FXML
 	private Button btnLogout;
@@ -132,6 +135,9 @@ public class AccountController implements Initializable {
 
 	@FXML
 	private MenuItem deleteUsers;
+
+	@FXML
+	private Pagination pagination;
 
 	@Autowired
 	@Lazy
@@ -309,8 +315,26 @@ public class AccountController implements Initializable {
 
 		setColumnProperties();
 
+		pagination.setPageFactory(this::createPage);
+
 		// Add all users into table
 		loadUserDetails();
+
+	}
+
+	private Node createPage(int pageIndex) {
+		int fromIndex = pageIndex * rowsPerPage;
+		int toIndex = Math.min(fromIndex + rowsPerPage, userList.size());
+		if (fromIndex > toIndex) {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Không còn dữ liệu");
+			alert.setHeaderText(null);
+			alert.setContentText("Danh sách không còn data");
+			alert.showAndWait();
+		}else {
+			accountTable.setItems(FXCollections.observableArrayList(userList.subList(fromIndex, toIndex)));
+		}
+		return accountTable;
 	}
 
 	/*
