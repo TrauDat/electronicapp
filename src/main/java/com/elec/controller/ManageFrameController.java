@@ -4,7 +4,6 @@ import org.springframework.stereotype.Controller;
 
 import com.elec.common.Dialog;
 import com.elec.common.FXMLLoaderManage;
-import com.elec.entity.Account;
 import com.elec.view.FxmlView;
 import com.elec.view.Menu;
 
@@ -19,20 +18,18 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 @Controller
-public class MainFrameController {
+public class ManageFrameController {
 
 	@FXML
 	private VBox sideBar;
 
 	@FXML
-	private StackPane contentView;
+	private StackPane manageView;
 
 	@FXML
-	private void initialize() {
-		loadView(Menu.Home);
+	private void initailze() {
+		loadView(Menu.ManageAccount);
 	}
-
-	private static Account accountStatic;
 
 	@FXML
 	private void clickMenu(MouseEvent event) {
@@ -42,6 +39,7 @@ public class MainFrameController {
 			// Confirm and display custom dialog
 			Dialog.DialogBuilder.builder().title("Thoát").message("Bạn có muốn thoát khỏi ElecApp?")
 					.okActionListenter(() -> sideBar.getScene().getWindow().hide()).build().show();
+
 		} else {
 			Menu menu = Menu.valueOf(node.getId());
 			loadView(menu);
@@ -58,40 +56,31 @@ public class MainFrameController {
 				}
 			}
 
-			contentView.getChildren().clear();
+			manageView.getChildren().clear();
 
 			FXMLLoader loader = FXMLLoaderManage.fXMLLoader(menu.getFxml());
 			Parent view = loader.load();
 
 			AbstractController controller = loader.getController();
 			controller.setTitle(menu);
-			contentView.getChildren().add(view);
+			manageView.getChildren().add(view);
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-	}
-
-	public static Account getAccount(Account account) {
-		accountStatic = account;
-		return accountStatic;
-	}
-
-	public static Account loadAccount() {
-		return accountStatic;
 	}
 
 	public static void show() {
 		try {
 			Stage stage = new Stage();
-			FXMLLoader loader = FXMLLoaderManage.fXMLLoader(FxmlView.MAINFRAME.getFxmlFile());
+			FXMLLoader loader = FXMLLoaderManage.fXMLLoader(FxmlView.MANAGEFRAME.getFxmlFile());
 			Parent root = loader.load();
 			stage.setScene(new Scene(root));
 			stage.setFullScreen(true);
 			stage.show();
+
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 	}
-
 }

@@ -37,6 +37,17 @@ public enum FxmlView {
 			return "/fxml/MainFrame.fxml";
 		}
 	},
+	MANAGEFRAME {
+		@Override
+		public String getTitle() {
+			return getStringFromResourceBundle("manageFrame.title");
+		}
+		
+		@Override
+		public String getFxmlFile() {
+			return "/fxml/ManagerFrame.fxml";
+		}
+	},
 	HOUSEHOLDEDIT {
 		@Override
 		public String getTitle() {

@@ -1,9 +1,10 @@
 package com.elec.view;
 
 public enum Menu {
+	ManageAccount("Quản lý tài khoản"),
 	Home("Trang chủ"),
-	AddHouseHold("Quản lý hộ gia đình"),
-	ListHouseHold("Danh sách hộ gia đình");
+	AddHouseHold("Quản lý hộ gia đình");
+	
 	
 	private String title;
 	

@@ -11,22 +11,20 @@ import com.elec.config.StageManager;
 import javafx.fxml.FXMLLoader;
 
 public class FXMLLoaderManage {
-	private static StageManager stageManagerStatic;
 	private static SpringFXMLLoader springFXMLLoaderStatic;
-	
+
 	@Autowired
 	private SpringFXMLLoader springFXMLLoader;
 
 	@Autowired
 	@Lazy
 	private StageManager stageManager;
-	
+
 	@PostConstruct
 	private void init() {
-		stageManagerStatic = this.stageManager;
 		springFXMLLoaderStatic = this.springFXMLLoader;
 	}
-	
+
 	public static FXMLLoader fXMLLoader(String fxmlFilePath) {
 		FXMLLoader loader = springFXMLLoaderStatic.getFXMLLoader(fxmlFilePath);
 		return loader;

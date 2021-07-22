@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import com.elec.config.StageManager;
 import com.elec.entity.Account;
 import com.elec.service.AccountService;
-import com.elec.view.FxmlView;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -49,7 +48,8 @@ public class LoginController implements Initializable{
 		if(accountService.authenticate(getUsername(), getPassword())) {
 			Account account = accountService.findByEmail(getUsername());
 			if (account.getRole().equals(ROLE_ADMIN)) {
-				stageManager.switchScene(FxmlView.ADMIN);
+//				stageManager.switchScene(FxmlView.MANAGEFRAME);
+				ManageFrameController.show();
 			} else {
 				// User view
 				MainFrameController.getAccount(account);

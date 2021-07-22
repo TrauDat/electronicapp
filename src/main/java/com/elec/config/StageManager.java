@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import com.elec.view.FxmlView;
 
 import javafx.application.Platform;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -68,11 +67,6 @@ public class StageManager {
 			logAndExit("Unable to load FXML view" + fxmlFilePath, exception);
 		}
 		return rootNode;
-	}
-	
-	public FXMLLoader fXMLLoader(String fxmlFilePath) {
-		FXMLLoader loader = springFXMLLoader.getFXMLLoader(fxmlFilePath);
-		return loader;
 	}
 	
 	private void logAndExit(String errorMsg, Exception exception) {
