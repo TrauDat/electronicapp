@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.PasswordField?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="-Infinity" minWidth="-Infinity" styleClass="dialog"
+	stylesheets="@../styles/application.css"
+	xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="com.elec.popup.ManageAccountEdit">
+	<children>
+		<VBox styleClass="dialog-icon">
+			<children>
+				<SVGPath
+					content="M32 19l-6-6v-9h-4v5l-6-6-16 16v1h4v10h10v-6h4v6h10v-10h4z" />
+			</children>
+		</VBox>
+		<VBox styleClass="dialog-body" HBox.hgrow="ALWAYS">
+			<children>
+				<Label fx:id="title" styleClass="dialog-title"
+					text="Chỉnh sửa tài khoản" />
+				<VBox styleClass="dialog-message-box">
+					<children>
+						<Label fx:id="message" />
+						<VBox layoutX="10.0" layoutY="52.0" styleClass="dialog-">
+							<children>
+								<Label text="Họ" />
+								<TextField fx:id="lastName" promptText="Họ" />
+							</children>
+						</VBox>
+						<VBox layoutX="10.0" layoutY="52.0" styleClass="dialog-">
+							<children>
+								<Label text="Tên" />
+								<TextField fx:id="firstName" promptText="Tên" />
+							</children>
+						</VBox>
+						<VBox layoutX="10.0" layoutY="52.0">
+							<children>
+								<Label text="Năm sinh" />
+								<DatePicker fx:id="dob" editable="false"
+									prefHeight="30.0" prefWidth="245.0" promptText="Năm sinh">
+								</DatePicker>
+							</children>
+						</VBox>
+						<VBox layoutX="10.0" layoutY="99.0" styleClass="dialog-">
+							<Label text="Giới tính" />
+							<HBox alignment="CENTER_LEFT" prefHeight="30.0"
+								prefWidth="255.0" spacing="15.0">
+								<children>
+									<RadioButton fx:id="rbMale" mnemonicParsing="false"
+										selected="true" text="Nam" textFill="BLACK">
+										<toggleGroup>
+											<ToggleGroup fx:id="gender" />
+										</toggleGroup>
+									</RadioButton>
+									<RadioButton fx:id="rbFemale"
+										mnemonicParsing="false" text="Nữ" textFill="BLACK"
+										toggleGroup="$gender">
+									</RadioButton>
+								</children>
+							</HBox>
+						</VBox>
+						<VBox layoutX="10.0" layoutY="99.0" styleClass="dialog-">
+							<Label text="Quyền hạn" />
+							<children>
+								<ComboBox fx:id="cbRole" promptText="Select Role">
+								</ComboBox>
+							</children>
+						</VBox>
+						<VBox layoutX="10.0" layoutY="52.0" styleClass="dialog-">
+							<children>
+								<Label text="Email" />
+								<TextField fx:id="email" promptText="Email" />
+							</children>
+						</VBox>
+						<VBox layoutX="10.0" layoutY="52.0" styleClass="dialog-">
+							<children>
+								<Label text="Mật khẩu" />
+								<PasswordField fx:id="password"
+									promptText="Password" />
+							</children>
+						</VBox>
+					</children>
+				</VBox>
+				<HBox styleClass="dialog-button-box">
+					<children>
+						<Button mnemonicParsing="false" onAction="#save"
+							styleClass="wid-120" text="Save" />
+						<Button layoutX="10.0" layoutY="10.0"
+							mnemonicParsing="false" onAction="#close" styleClass="wid-120"
+							text="Close" />
+					</children>
+				</HBox>
+			</children>
+		</VBox>
+	</children>
+</HBox>

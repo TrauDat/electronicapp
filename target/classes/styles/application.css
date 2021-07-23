@@ -6,23 +6,23 @@
 }
 
 .login-view {
-    -fx-pref-width: 480px;
+    -fx-pref-width: 480.0px;
     -fx-background-color: secondary-light;
 }
 
 .login-title {
     -fx-alignment: center-left;
-    -fx-padding: 16px;
+    -fx-padding: 16.0px;
     -fx-background-color: primary;
 }
 
 .login-title > .header {
-    -fx-font-size: 20px;
+    -fx-font-size: 20.0px;
     -fx-text-fill: white;
 }
 
 .login-body {
-    -fx-padding: 0 64 16 16;
+    -fx-padding: 0.0 64.0 16.0 16.0;
 }
 
 .al-center-left {
@@ -30,11 +30,11 @@
 }
 
 .sp-5 {
-    -fx-spacing: 5px;
+    -fx-spacing: 5.0px;
 }
 
 .wid-120 {
-    -fx-pref-width: 120px;
+    -fx-pref-width: 120.0px;
 }
 
 .text-field, .password-field, .button {
@@ -49,21 +49,21 @@
 }
 
 .main-frame {
-    -fx-pref-width: 1290px;
-    -fx-pref-height: 780px;
+    -fx-pref-width: 1290.0px;
+    -fx-pref-height: 780.0px;
 }
 
 .side-bar {
-    -fx-padding: 10 0 0 0;
+    -fx-padding: 10.0 0.0 0.0 0.0;
     -fx-background-color: primary;
 }
 
 .side-bar-menu {
     -fx-alignment: center;
-    -fx-spacing: 5px;
-    -fx-pref-height: 70px;
-    -fx-pref-width: 100px;
-    -fx-min-width: 100px;
+    -fx-spacing: 5.0px;
+    -fx-pref-height: 70.0px;
+    -fx-pref-width: 100.0px;
+    -fx-min-width: 100.0px;
 }
 
 .side-bar-menu: hover {
@@ -85,27 +85,27 @@
 }
 
 .content-view {
-    -fx-pref-width: 1180px;
-    -fx-pref-height: 780px;
-    -fx-max-width: 5000px;
-    -fx-max-height: 3000px;
+    -fx-pref-width: 1180.0px;
+    -fx-pref-height: 780.0px;
+    -fx-max-width: 5000.0px;
+    -fx-max-height: 3000.0px;
 }
 
 .content-view-header {
-    -fx-padding: 20px;
+    -fx-padding: 20.0px;
 }
 
 .content-view-header > .title{
-    -fx-font-size: 32px;
+    -fx-font-size: 32.0px;
 }
 
 .dialog {
-    -fx-pref-width: 600px;
+    -fx-pref-width: 600.0px;
     -fx-background-color: secondary-light;
 }
 
 .dialog-icon {
-    -fx-pref-width: 160px;
+    -fx-pref-width: 160.0px;
     -fx-alignment: center;
     -fx-background-color: primary;
 }
@@ -115,21 +115,21 @@
 }
 
 .dialog-body {
-    -fx-padding: 20px;
+    -fx-padding: 20.0px;
     -fx-alignment: center-left;
 }
 
 .dialog-title {
-    -fx-font-size: 24px;
+    -fx-font-size: 24.0px;
 }
 
 .dialog-message-box {
-    -fx-padding: 20 0 20 0;
-    -fx-spacing: 5;
+    -fx-padding: 20.0 0.0 20.0 0.0;
+    -fx-spacing: 5.0;
 }
 
 .sp-10 {
-    -fx-spacing: 10;
+    -fx-spacing: 10.0;
 }
 
 .dialog-button:hover {
@@ -139,29 +139,29 @@
 
 .dialog-button-box {
     -fx-alignment: center-right;
-    -fx-spacing: 10;
+    -fx-spacing: 10.0;
 }
 
 .dialog-button-box Label {
-    -fx-font-size: 18px;
+    -fx-font-size: 18.0px;
 }
 
 .category-container {
-    -fx-padding: 0 20 20 20;
-    -fx-vgap: 20;
-    -fx-hgap: 20;
+    -fx-padding: 0.0 20.0 20.0 20.0;
+    -fx-vgap: 20.0;
+    -fx-hgap: 20.0;
 }
 
 .category-item {
     -fx-alignment: center-left;
-    -fx-padding: 20;
-    -fx-spacing: 20;
-    -fx-pref-width: 240px;
+    -fx-padding: 20.0;
+    -fx-spacing: 20.0;
+    -fx-pref-width: 240.0px;
     -fx-background-color: secondary;
 }
 
 .category-item Label {
-    -fx-font-size: 24px;
+    -fx-font-size: 24.0px;
     -fx-text-fill: secondary-light;
 }
 
@@ -171,7 +171,7 @@
 
 .add-button {
     -fx-alignment: center;
-    -fx-pref-width: 100px;
+    -fx-pref-width: 100.0px;
 }
 
 .add-button:hover {
@@ -183,15 +183,20 @@
 }
 
 .search-bar {
-    -fx-padding: 0 0 0 20;
-    -fx-spacing: 10;
+    -fx-padding: 0.0 0.0 0.0 20.0;
+    -fx-spacing: 10.0;
 }
 
 .search-bar > TextField, .search-bar > ComboBox {
-    -fx-pref-width: 200px;
-    -fx-max-width: 200px;
+    -fx-pref-width: 200.0px;
+    -fx-max-width: 200.0px;
 }
 
 .table-wrapper {
-    -fx-padding: 20;
+    -fx-padding: 20.0;
+}
+
+.logout {
+	-fx-background-color: primary-light;
+    -fx-text-fill: white;
 }

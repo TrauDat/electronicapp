@@ -31,7 +31,7 @@ public class HouseHoldController extends AbstractController {
 
 	@FXML
 	private void initialize() {
-		MenuItem edit = new MenuItem("Chỉnh sửa");
+		MenuItem edit = new MenuItem("Cập nhật");
 		edit.setOnAction(event -> {
 			HouseHold houseHold = tableView.getSelectionModel().getSelectedItem();
 			if (null != houseHold) {

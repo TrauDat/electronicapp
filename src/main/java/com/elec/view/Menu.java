@@ -3,6 +3,7 @@ package com.elec.view;
 public enum Menu {
 	ManageAccount("Quản lý tài khoản"),
 	Home("Trang chủ"),
+	HomeAdmin("Trang chủ Admin"),
 	AddHouseHold("Quản lý hộ gia đình");
 	
 	

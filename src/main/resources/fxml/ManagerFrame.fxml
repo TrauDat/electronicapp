@@ -7,34 +7,48 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="main-frame" stylesheets="@../styles/application.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.elec.controller.ManageFrameController">
-   <children>
-      <VBox fx:id="sideBar" styleClass="side-bar">
-         <children>
-            <VBox id="ManageAccount" onMouseClicked="#clickMenu" prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <SVGPath content="M32 18.451l-16-12.42-16 12.42v-5.064l16-12.42 16 12.42zM28 18v12h-8v-8h-8v8h-8v-12l12-9z" />
-                  <Label text="Quản lý tài khoản" />
-               </children>
-               <styleClass>
-                  <String fx:value="side-bar-menu" />
-                  <String fx:value="active" />
-               </styleClass>
-            </VBox>
-            <VBox id="ManageBilling" layoutX="10.0" layoutY="10.0" onMouseClicked="#clickMenu" prefHeight="200.0" prefWidth="100.0" styleClass="side-bar-menu">
-               <children>
-                  <SVGPath content="M16 0c-8.837 0-16 2.239-16 5v4c0 2.761 7.163 5 16 5s16-2.239 16-5v-4c0-2.761-7.163-5-16-5z  M16 17c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z M16 26c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z" />
-                  <Label text="Quản lý hóa đơn" />
-               </children>
-            </VBox>
-            <VBox id="Exit" layoutX="10.0" layoutY="290.0" onMouseClicked="#clickMenu" prefHeight="200.0" prefWidth="100.0" styleClass="side-bar-menu">
-               <children>
-                  <SVGPath content="M20 4.581v4.249c1.131 0.494 2.172 1.2 3.071 2.099 1.889 1.889 2.929 4.4 2.929 7.071s-1.040 5.182-2.929 7.071c-1.889 1.889-4.4 2.929-7.071 2.929s-5.182-1.040-7.071-2.929c-1.889-1.889-2.929-4.4-2.929-7.071s1.040-5.182 2.929-7.071c0.899-0.899 1.94-1.606 3.071-2.099v-4.249c-5.783 1.721-10 7.077-10 13.419 0 7.732 6.268 14 14 14s14-6.268 14-14c0-6.342-4.217-11.698-10-13.419zM14 0h4v16h-4z" />
-                  <Label text="Thoát" />
-               </children>
-            </VBox>
-         </children>
-      </VBox>
-      <StackPane fx:id="manageView" HBox.hgrow="ALWAYS" />
-   </children>
+<HBox maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+	prefWidth="600.0" styleClass="main-frame"
+	stylesheets="@../styles/application.css"
+	xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="com.elec.controller.ManageFrameController">
+	<children>
+		<VBox fx:id="sideBar" styleClass="side-bar">
+			<children>
+				<VBox id="HomeAdmin" onMouseClicked="#clickMenu"
+					prefHeight="200.0" prefWidth="100.0">
+					<children>
+						<SVGPath
+							content="M32 18.451l-16-12.42-16 12.42v-5.064l16-12.42 16 12.42zM28 18v12h-8v-8h-8v8h-8v-12l12-9z" />
+						<Label text="Trang chủ" />
+					</children>
+					<styleClass>
+						<String fx:value="side-bar-menu" />
+						<String fx:value="active" />
+					</styleClass>
+				</VBox>
+
+				<VBox id="ManageAccount" layoutX="10.0" layoutY="10.0"
+					onMouseClicked="#clickMenu" prefHeight="200.0" prefWidth="100.0"
+					styleClass="side-bar-menu">
+					<children>
+						<SVGPath
+							content="M32 18.451l-16-12.42-16 12.42v-5.064l16-12.42 16 12.42zM28 18v12h-8v-8h-8v8h-8v-12l12-9z" />
+						<Label text="Quản lý tài khoản" />
+					</children>
+				</VBox>
+				<VBox id="Exit" layoutX="10.0" layoutY="290.0"
+					onMouseClicked="#clickMenu" prefHeight="200.0" prefWidth="100.0"
+					styleClass="side-bar-menu">
+					<children>
+						<SVGPath
+							content="M20 4.581v4.249c1.131 0.494 2.172 1.2 3.071 2.099 1.889 1.889 2.929 4.4 2.929 7.071s-1.040 5.182-2.929 7.071c-1.889 1.889-4.4 2.929-7.071 2.929s-5.182-1.040-7.071-2.929c-1.889-1.889-2.929-4.4-2.929-7.071s1.040-5.182 2.929-7.071c0.899-0.899 1.94-1.606 3.071-2.099v-4.249c-5.783 1.721-10 7.077-10 13.419 0 7.732 6.268 14 14 14s14-6.268 14-14c0-6.342-4.217-11.698-10-13.419zM14 0h4v16h-4z" />
+						<Label text="Thoát" />
+					</children>
+				</VBox>
+			</children>
+		</VBox>
+		<StackPane fx:id="manageView" HBox.hgrow="ALWAYS" />
+	</children>
 </HBox>

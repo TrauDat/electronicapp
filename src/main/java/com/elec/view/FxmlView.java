@@ -59,6 +59,17 @@ public enum FxmlView {
 			return "/fxml/HouseHoldEdit.fxml";
 		}
 	},
+	MANAGEACCOUNTEDIT {
+		@Override
+		public String getTitle() {
+			return getStringFromResourceBundle("householdedit.title");
+		}
+		
+		@Override
+		public String getFxmlFile() {
+			return "/fxml/ManageAccountEdit.fxml";
+		}
+	},
 	DIALOG {
 		@Override
 		public String getTitle() {
