@@ -62,7 +62,7 @@ public enum FxmlView {
 	MANAGEACCOUNTEDIT {
 		@Override
 		public String getTitle() {
-			return getStringFromResourceBundle("householdedit.title");
+			return getStringFromResourceBundle("managebill.title");
 		}
 		
 		@Override
@@ -70,6 +70,18 @@ public enum FxmlView {
 			return "/fxml/ManageAccountEdit.fxml";
 		}
 	},
+	MANAGEBILL {
+		@Override
+		public String getTitle() {
+			return getStringFromResourceBundle("householdedit.title");
+		}
+		
+		@Override
+		public String getFxmlFile() {
+			return "/fxml/BillEdit.fxml";
+		}
+	}
+	,
 	DIALOG {
 		@Override
 		public String getTitle() {

@@ -28,7 +28,7 @@ public class ManageFrameController {
 
 	@FXML
 	private void initailze() {
-		loadView(Menu.Home);
+		loadView(Menu.HomeAdmin);
 	}
 
 	@FXML

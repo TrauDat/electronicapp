@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -37,5 +38,9 @@ public class HouseHold {
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH })
 	@JoinColumn(name = "account_id")
 	private Account account;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="bill_id")
+	private Bill bill;
 
 }

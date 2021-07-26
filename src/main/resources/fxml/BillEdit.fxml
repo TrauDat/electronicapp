@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="-Infinity" minWidth="-Infinity" styleClass="dialog"
+	stylesheets="@../styles/application.css"
+	xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="com.elec.popup.BillEdit">
+	<children>
+		<VBox styleClass="dialog-icon">
+			<children>
+				<SVGPath
+					content="M32 19l-6-6v-9h-4v5l-6-6-16 16v1h4v10h10v-6h4v6h10v-10h4z" />
+			</children>
+		</VBox>
+		<VBox styleClass="dialog-body" HBox.hgrow="ALWAYS">
+			<children>
+				<Label fx:id="title" styleClass="dialog-title"
+					text="Cập nhật hóa đơn" />
+				<VBox styleClass="dialog-message-box">
+					<children>
+						<Label fx:id="message" />
+						<VBox layoutX="10.0" layoutY="52.0" styleClass="dialog-">
+							<children>
+								<Label text="Mã khách hàng" />
+								<TextField fx:id="idCustomer"
+									promptText="Mã khách hàng" />
+							</children>
+						</VBox>
+						<VBox layoutX="10.0" layoutY="52.0" styleClass="dialog-">
+							<children>
+								<Label text="Địa chỉ" />
+								<TextField fx:id="address"
+									promptText="Nhập địa chỉ" />
+							</children>
+						</VBox>
+						<VBox layoutX="10.0" layoutY="52.0" styleClass="dialog-">
+							<children>
+								<Label text="SDT" />
+								<TextField fx:id="phone"
+									promptText="Nhập số điện thoại" />
+							</children>
+						</VBox>
+						<VBox layoutX="10.0" layoutY="52.0" styleClass="dialog-">
+							<children>
+								<Label text="Chỉ số cũ" />
+								<TextField fx:id="consumptionNumOld" promptText="Nhập chỉ số cũ" />
+							</children>
+						</VBox>
+						<VBox layoutX="10.0" layoutY="52.0" styleClass="dialog-">
+							<children>
+								<Label text="Chỉ số mới" />
+								<TextField fx:id="consumptionNumNew" promptText="Nhập chỉ số mới" />
+							</children>
+						</VBox>
+					</children>
+				</VBox>
+				<HBox styleClass="dialog-button-box">
+					<children>
+						<Button mnemonicParsing="false" onAction="#save"
+							styleClass="wid-120" text="Save" />
+						<Button layoutX="10.0" layoutY="10.0"
+							mnemonicParsing="false" onAction="#close" styleClass="wid-120"
+							text="Close" />
+					</children>
+				</HBox>
+			</children>
+		</VBox>
+	</children>
+</HBox>

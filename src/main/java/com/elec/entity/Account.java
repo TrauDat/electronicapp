@@ -41,9 +41,13 @@ public class Account {
 
 	private String password;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "account", cascade = { CascadeType.PERSIST, CascadeType.MERGE,CascadeType.DETACH,
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "account", cascade = { CascadeType.PERSIST, CascadeType.MERGE,CascadeType.DETACH,
 			CascadeType.REFRESH })
 	private List<HouseHold> listHouseHold;
+	
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountBill", cascade = { CascadeType.PERSIST, CascadeType.MERGE,CascadeType.DETACH,
+//			CascadeType.REFRESH })
+//	private List<Bill> listBill;
 
 	@Transient
 	private boolean isSendMail;
@@ -69,7 +73,7 @@ public class Account {
 
 		houseHold.setAccount(this);
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Account [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", dob=" + dob + ", email="
