@@ -55,6 +55,16 @@
                        <PropertyValueFactory property="consumptionNumNew" />
                     </cellValueFactory>
                  </TableColumn>
+                 <TableColumn maxWidth="252.0" minWidth="133.0" prefWidth="200.0" text="Ngày bắt đầu">
+							<cellValueFactory>
+								<PropertyValueFactory property="fromDate" />
+							</cellValueFactory>
+				</TableColumn>
+				 <TableColumn maxWidth="252.0" minWidth="133.0" prefWidth="200.0" text="Ngày kết thúc">
+							<cellValueFactory>
+								<PropertyValueFactory property="toDate" />
+							</cellValueFactory>
+				</TableColumn>
                  <TableColumn maxWidth="252.0" minWidth="133.0" prefWidth="200.0" text="Trạng thái">
                     <cellValueFactory>
                        <PropertyValueFactory property="status" />

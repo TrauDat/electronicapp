@@ -51,6 +51,22 @@
 									promptText="Nhập số điện thoại" />
 							</children>
 						</VBox>
+						<VBox layoutX="10.0" layoutY="52.0">
+							<children>
+								<Label text="Ngày bắt đầu" />
+								<DatePicker fx:id="fromDate" editable="false"
+									prefHeight="30.0" prefWidth="245.0" promptText="Chọn ngày bắt đầu">
+								</DatePicker>
+							</children>
+						</VBox>
+						<VBox layoutX="10.0" layoutY="52.0">
+							<children>
+								<Label text="Ngày kết thúc" />
+								<DatePicker fx:id="toDate" editable="false"
+									prefHeight="30.0" prefWidth="245.0" promptText="Chọn ngày kết thúc">
+								</DatePicker>
+							</children>
+						</VBox>
 						<VBox layoutX="10.0" layoutY="52.0" styleClass="dialog-">
 							<children>
 								<Label text="Chỉ số cũ" />

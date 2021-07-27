@@ -24,5 +24,5 @@ public class BillServiceImpl implements BillService{
 	public Bill save(Bill bill) {
 		return billReposiotry.save(bill);
 	}
-
+	
 }

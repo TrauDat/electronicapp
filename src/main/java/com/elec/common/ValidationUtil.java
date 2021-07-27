@@ -1,5 +1,10 @@
 package com.elec.common;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -50,6 +55,31 @@ public class ValidationUtil {
 				alert.setContentText("Vui lòng nhập " + field + " hợp lệ");
 		}
 		alert.showAndWait();
+	}
+	
+	
+	public static void validateField(String content) {
+		Alert alert = new Alert(AlertType.WARNING);
+		alert.setTitle("Validation Error");
+		alert.setHeaderText(null);
+		alert.setContentText(content);
+		alert.showAndWait();
+	}
+	
+	public static boolean validationDate(String toDate, String fromDate) throws ParseException{
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd", Locale.ENGLISH);
+		Date firstDate = sdf.parse(toDate);
+		Date secondDate = sdf.parse(fromDate);
+		
+		long diffinMillies = Math.abs(secondDate.getTime() - firstDate.getTime());
+		long diff = TimeUnit.DAYS.convert(diffinMillies, TimeUnit.MILLISECONDS);
+		
+		if (diff < 0) {
+			validateField("Ngày kết thúc phải lớn hơn ngày bắt đầu");
+			return false;
+		}
+		
+		return true;
 	}
 	
 }

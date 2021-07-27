@@ -1,16 +1,19 @@
 package com.elec.entity;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -39,8 +42,14 @@ public class HouseHold {
 	@JoinColumn(name = "account_id")
 	private Account account;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="bill_id")
-	private Bill bill;
+	@ManyToMany(fetch=FetchType.LAZY, cascade= {
+			CascadeType.MERGE, CascadeType.DETACH,
+			CascadeType.REFRESH})
+	@JoinTable(
+			name="customer_bill",
+			joinColumns = @JoinColumn(name = "customer_id"),
+			inverseJoinColumns = @JoinColumn(name = "bill_id")
+			)
+	private List<Bill> bill;
 
 }

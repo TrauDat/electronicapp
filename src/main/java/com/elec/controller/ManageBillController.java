@@ -5,14 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import com.elec.dto.BillDTO;
-import com.elec.entity.Account;
 import com.elec.entity.Bill;
-import com.elec.entity.HouseHold;
 import com.elec.popup.BillEdit;
-import com.elec.service.AccountService;
 import com.elec.service.BillService;
-import com.elec.service.HouseHoldService;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
@@ -26,15 +21,17 @@ public class ManageBillController extends AbstractController {
 	@FXML
 	private TableView<Bill> tableView;
 
-	@Autowired
-	private AccountService accountService;
-	
-	@Autowired
-	private HouseHoldService houseHoldService;
-
 	@FXML
 	private void initialize() {
-
+//		MenuItem edit = new MenuItem("Cập nhật");
+//		edit.setOnAction(event -> {
+//			Bill bill = tableView.getSelectionModel().getSelectedItem();
+//			if (null != bill) {
+//				BillEdit.edit(bill, this::save);
+//			}
+//		});
+//		
+//		tableView.setContextMenu(new ContextMenu(edit));
 		search();
 	}
 
@@ -50,26 +47,8 @@ public class ManageBillController extends AbstractController {
 		BillEdit.addNew(this::save);
 	}
 	
-	private void save(BillDTO billDTO) {
-		//Account account = MainFrameController.loadAccount();
-//		bill.get
-		Bill bill = new Bill();
-		if (bill.getId() != null) {
-			bill.setId(billDTO.getId());
-		}
-//		bill.setAccountBill(billDTO.getAccountBill());
-		bill.setAddress(billDTO.getAddress());
-		bill.setPhone(billDTO.getPhone());
-		bill.setConsumptionNumOld(billDTO.getConsumptionNumOld());
-		bill.setConsumptionNumNew(billDTO.getConsumptionNumNew());
-		HouseHold houseHold = billDTO.getHouseHold();
-//		if (bill.getId() != null) {
-//
-//		} else {
-//			
-			houseHold.setBill(bill);
-//		}
-			houseHoldService.save(houseHold);
+	private void save(Bill bill) {
+		billService.save(bill);
 		search();
 	}
 }

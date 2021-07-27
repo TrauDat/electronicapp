@@ -14,4 +14,6 @@ public interface HouseHoldService {
 	Optional<HouseHold> findById(Long id);
 	
 	List<HouseHold> findByAccountid(Long id);
+	
+	Optional<HouseHold> seachByJPQL(Long id);
 }

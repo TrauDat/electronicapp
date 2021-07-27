@@ -3,14 +3,17 @@ package com.elec;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import com.elec.config.StageManager;
+import com.elec.repository.BaseRepositoryImpl;
 import com.elec.view.FxmlView;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
 
 @SpringBootApplication
+@EnableJpaRepositories(repositoryBaseClass = BaseRepositoryImpl.class)
 public class Main extends Application {
 
 	protected ConfigurableApplicationContext springContext;

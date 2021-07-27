@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.elec.common.FXMLLoaderManage;
-import com.elec.dto.BillDTO;
+import com.elec.common.ValidationUtil;
 import com.elec.entity.Bill;
 import com.elec.entity.HouseHold;
 import com.elec.service.HouseHoldService;
@@ -16,6 +16,7 @@ import com.elec.view.FxmlView;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
@@ -25,6 +26,8 @@ import javafx.stage.StageStyle;
 @Controller
 public class BillEdit {
 
+	private static final String phonePattern = "\\d{3}-\\d{2}-\\d{7}";
+
 	@FXML
 	private Label title;
 
@@ -33,6 +36,12 @@ public class BillEdit {
 
 	@FXML
 	private TextField phone;
+
+	@FXML
+	private DatePicker fromDate;
+
+	@FXML
+	private DatePicker toDate;
 
 	@FXML
 	private TextField idCustomer;
@@ -46,15 +55,15 @@ public class BillEdit {
 	@Autowired
 	private HouseHoldService houseHoldService;
 
-	private BillDTO bill;
+	private Bill bill;
 
-	private Consumer<BillDTO> saveHandler;
+	private Consumer<Bill> saveHandler;
 
-	public static void addNew(Consumer<BillDTO> saveHandler) {
+	public static void addNew(Consumer<Bill> saveHandler) {
 		edit(null, saveHandler);
 	}
 
-	public static void edit(BillDTO bill, Consumer<BillDTO> saveHandler) {
+	public static void edit(Bill bill, Consumer<Bill> saveHandler) {
 		try {
 			Stage stage = new Stage(StageStyle.UNDECORATED);
 			FXMLLoader loader = FXMLLoaderManage.fXMLLoader(FxmlView.MANAGEBILL.getFxmlFile());
@@ -70,37 +79,57 @@ public class BillEdit {
 		}
 	}
 
-	private void init(BillDTO bill, Consumer<BillDTO> saveHandler) {
+	private void init(Bill bill, Consumer<Bill> saveHandler) {
 		this.bill = bill;
 		this.saveHandler = saveHandler;
 
 		if (null == bill) {
 			title.setText("Tạo mới hóa đơn");
-			this.bill = new BillDTO();
+			this.bill = new Bill();
 		} else {
 			title.setText("Cập nhật hóa đơn");
 			this.bill = bill;
 		}
+		fromDate.setValue(this.bill.getFromDate());
+		toDate.setValue(this.bill.getToDate());
 		address.setText(this.bill.getAddress());
 		phone.setText(this.bill.getPhone());
 		consumptionNumOld.setText(String.valueOf(this.bill.getConsumptionNumOld()));
 		consumptionNumNew.setText(String.valueOf(this.bill.getConsumptionNumNew()));
-
 	}
 
 	@FXML
 	private void save() {
 		try {
-			Optional<HouseHold> houseHold = houseHoldService.findById(Long.parseLong(idCustomer.getText()));
-			if (houseHold.isPresent()) {
-				bill.setHouseHold(houseHold.get());
-				bill.setAddress(address.getText());
-				bill.setPhone(phone.getText());
-				bill.setConsumptionNumOld(Long.parseLong(consumptionNumOld.getText()));
-				bill.setConsumptionNumNew(Long.parseLong(consumptionNumNew.getText()));
-				saveHandler.accept(bill);
+			if (ValidationUtil.emptyValidation("Mã khách hàng", idCustomer.getText().isEmpty())) {
+				Optional<HouseHold> houseHold = houseHoldService.findById(Long.parseLong(idCustomer.getText()));
+//				Optional<HouseHold> houseHold = houseHoldService.seachByJPQL(Long.parseLong(idCustomer.getText()));
+				if (houseHold.isPresent()) {
+					if (ValidationUtil.emptyValidation("Địa chỉ", ValidationUtil.isEmpty(address.getText()))
+							&& ValidationUtil.emptyValidation("Số điện thoại", ValidationUtil.isEmpty(phone.getText()))
+							&& ValidationUtil.validate("Số điện thoại", phone.getText(), phonePattern)
+							&& ValidationUtil.emptyValidation("Ngày bắt đầu", ValidationUtil.isEmpty(fromDate.getEditor().getText()))
+							&& ValidationUtil.emptyValidation("Ngày kết thúc", ValidationUtil.isEmpty(toDate.getEditor().getText()))
+							&& ValidationUtil.emptyValidation("Chỉ số cũ", ValidationUtil.isEmpty(consumptionNumOld.getText()))
+							&& ValidationUtil.emptyValidation("Chỉ số mới", ValidationUtil.isEmpty(consumptionNumNew.getText()))) {
+						if (Long.parseLong(consumptionNumOld.getText()) < Long.parseLong(consumptionNumNew.getText())) {
+							bill.addHouseHold(houseHold.get());
+							bill.setFromDate(fromDate.getValue());
+							bill.setToDate(toDate.getValue());
+							bill.setAddress(address.getText());
+							bill.setPhone(phone.getText());
+							bill.setConsumptionNumOld(Long.parseLong(consumptionNumOld.getText()));
+							bill.setConsumptionNumNew(Long.parseLong(consumptionNumNew.getText()));
+							saveHandler.accept(bill);
+							close();
+						} else {
+							ValidationUtil.validateField("Chỉ số mới không được nhỏ hơn chỉ số cũ");
+						}
+					}
+				} else {
+					ValidationUtil.validateField("Không tìm thấy mã khách hàng");
+				}
 			}
-			close();
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
