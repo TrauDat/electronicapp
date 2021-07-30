@@ -1,6 +1,7 @@
 package com.elec.entity;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -11,9 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -42,14 +42,17 @@ public class HouseHold {
 	@JoinColumn(name = "account_id")
 	private Account account;
 	
-	@ManyToMany(fetch=FetchType.LAZY, cascade= {
-			CascadeType.MERGE, CascadeType.DETACH,
-			CascadeType.REFRESH})
-	@JoinTable(
-			name="customer_bill",
-			joinColumns = @JoinColumn(name = "customer_id"),
-			inverseJoinColumns = @JoinColumn(name = "bill_id")
-			)
-	private List<Bill> bill;
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "houseHold", cascade = { CascadeType.MERGE,CascadeType.DETACH,
+			CascadeType.REFRESH })
+	private List<Bill> listBill;
+	
+	public void add(Bill bill) {
+		if (bill == null) {
+			listBill = new ArrayList<>();
+		}
+		
+		listBill.add(bill);
+		bill.setHouseHold(this);
+	}
 
 }

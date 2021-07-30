@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 import lombok.Data;
 
@@ -40,21 +41,8 @@ public class Bill {
 	
 	private boolean status = true;
 	
-	@ManyToMany(fetch = FetchType.LAZY, cascade= {
-			CascadeType.MERGE, CascadeType.DETACH,
-			CascadeType.REFRESH})
-	@JoinTable(
-			name="customer_bill",
-			joinColumns=@JoinColumn(name="bill_id"),
-			inverseJoinColumns=@JoinColumn(name="customer_id")
-			)
-	private List<HouseHold> houseHold;
+	@ManyToOne(cascade = { CascadeType.DETACH, CascadeType.REFRESH })
+	@JoinColumn(name = "household_id")
+	private HouseHold houseHold;
 	
-	public void addHouseHold(HouseHold theHouseHold) {
-		if (houseHold == null) {
-			houseHold = new ArrayList<>();
-		}
-		
-		houseHold.add(theHouseHold);
-	}
 }

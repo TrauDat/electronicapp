@@ -49,6 +49,7 @@ public class ManageBillController extends AbstractController {
 	
 	private void save(Bill bill) {
 		billService.save(bill);
+		
 		search();
 	}
 }

@@ -60,7 +60,7 @@ public class BillEdit {
 	private Consumer<Bill> saveHandler;
 
 	public static void addNew(Consumer<Bill> saveHandler) {
-		edit(null, saveHandler);
+		edit(null,saveHandler);
 	}
 
 	public static void edit(Bill bill, Consumer<Bill> saveHandler) {
@@ -102,9 +102,9 @@ public class BillEdit {
 	private void save() {
 		try {
 			if (ValidationUtil.emptyValidation("Mã khách hàng", idCustomer.getText().isEmpty())) {
-				Optional<HouseHold> houseHold = houseHoldService.findById(Long.parseLong(idCustomer.getText()));
+				Optional<HouseHold> houseHoldOpt = houseHoldService.findById(Long.parseLong(idCustomer.getText()));
 //				Optional<HouseHold> houseHold = houseHoldService.seachByJPQL(Long.parseLong(idCustomer.getText()));
-				if (houseHold.isPresent()) {
+				if (houseHoldOpt.isPresent()) {
 					if (ValidationUtil.emptyValidation("Địa chỉ", ValidationUtil.isEmpty(address.getText()))
 							&& ValidationUtil.emptyValidation("Số điện thoại", ValidationUtil.isEmpty(phone.getText()))
 							&& ValidationUtil.validate("Số điện thoại", phone.getText(), phonePattern)
@@ -113,13 +113,14 @@ public class BillEdit {
 							&& ValidationUtil.emptyValidation("Chỉ số cũ", ValidationUtil.isEmpty(consumptionNumOld.getText()))
 							&& ValidationUtil.emptyValidation("Chỉ số mới", ValidationUtil.isEmpty(consumptionNumNew.getText()))) {
 						if (Long.parseLong(consumptionNumOld.getText()) < Long.parseLong(consumptionNumNew.getText())) {
-							bill.addHouseHold(houseHold.get());
 							bill.setFromDate(fromDate.getValue());
 							bill.setToDate(toDate.getValue());
 							bill.setAddress(address.getText());
 							bill.setPhone(phone.getText());
 							bill.setConsumptionNumOld(Long.parseLong(consumptionNumOld.getText()));
 							bill.setConsumptionNumNew(Long.parseLong(consumptionNumNew.getText()));
+							HouseHold houseHoldAdd = houseHoldOpt.get();
+							houseHoldAdd.add(bill);
 							saveHandler.accept(bill);
 							close();
 						} else {
