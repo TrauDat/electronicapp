@@ -1,8 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
-</AnchorPane>
 
+<HBox maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="-Infinity" minWidth="-Infinity" styleClass="dialog"
+	stylesheets="@../styles/application.css"
+	xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="com.elec.popup.BillDetail">
+	<children>
+		<VBox styleClass="dialog-body" HBox.hgrow="ALWAYS">
+			<children>
+				<Label fx:id="title" styleClass="dialog-title"
+					text="Hóa đơn tiền điện" />
+				<VBox styleClass="dialog-message-box">
+					<children>
+						<VBox layoutX="10.0" layoutY="52.0" styleClass="dialog-">
+							<children>
+								<Label text="Tên khách hàng: " />
+								<Label fx:id="customerName"/>
+							</children>
+						</VBox>
+						<VBox layoutX="10.0" layoutY="52.0" styleClass="dialog-">
+							<children>
+								<Label text="Địa chỉ: " />
+								<Label fx:id="address"/>
+							</children>
+						</VBox>
+						<VBox layoutX="10.0" layoutY="52.0" styleClass="dialog-">
+							<children>
+								<Label text="SDT: " />
+								<Label fx:id="phoneNumber"/>
+							</children>
+						</VBox>
+						<VBox layoutX="10.0" layoutY="52.0">
+							<children>
+								<Label text="Chỉ số cũ: " />
+								<Label fx:id="oldNum"/>
+							</children>
+						</VBox>
+						<VBox layoutX="10.0" layoutY="52.0">
+							<children>
+								<Label text="Chỉ số mới: " />
+								<Label fx:id="newNum"/>
+							</children>
+						</VBox>
+						<VBox layoutX="10.0" layoutY="52.0">
+							<children>
+								<Label text="Hệ số nhân: " />
+								<Label fx:id="numPlus"/>
+							</children>
+						</VBox>
+						<VBox layoutX="10.0" layoutY="52.0">
+							<children>
+								<Label text="Điện năng tiêu thụ: " />
+								<Label fx:id="powerUse"/>
+							</children>
+						</VBox>
+						<VBox layoutX="10.0" layoutY="52.0">
+							<children>
+								<Label text="Đơn giá: " />
+								<Label fx:id="amountUnit"/>
+							</children>
+						</VBox>
+						<VBox layoutX="10.0" layoutY="52.0">
+							<children>
+								<Label text="Thành tiền: " />
+								<Label fx:id="amount"/>
+							</children>
+						</VBox>
+					</children>
+				</VBox>
+				<HBox styleClass="dialog-button-box">
+					<children>
+						<Button layoutX="10.0" layoutY="10.0"
+							mnemonicParsing="false" onAction="#close" styleClass="wid-120"
+							text="Close" />
+					</children>
+				</HBox>
+			</children>
+		</VBox>
+	</children>
+</HBox>

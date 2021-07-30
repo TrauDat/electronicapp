@@ -49,6 +49,7 @@ public class LoginController implements Initializable{
 			Account account = accountService.findByEmail(getUsername());
 			if (account.getRole().equals(ROLE_ADMIN)) {
 //				stageManager.switchScene(FxmlView.MANAGEFRAME);
+				MainFrameController.getAccount(account);
 				ManageFrameController.show();
 			} else {
 				// User view

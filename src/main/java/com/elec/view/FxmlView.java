@@ -80,6 +80,17 @@ public enum FxmlView {
 		public String getFxmlFile() {
 			return "/fxml/BillEdit.fxml";
 		}
+	},
+	DETAILBILL {
+		@Override
+		public String getTitle() {
+			return getStringFromResourceBundle("householdedit.title");
+		}
+		
+		@Override
+		public String getFxmlFile() {
+			return "/fxml/BillDetail.fxml";
+		}
 	}
 	,
 	DIALOG {
